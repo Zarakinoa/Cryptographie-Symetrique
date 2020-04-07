@@ -50,7 +50,7 @@ tar -cvf CryptographieSymetrique.tar CryptographieSymetrique/
 cd CryptographieSymetrique/
 ```
     
-* Une fois à l'intérieur, éxecuter le logiciel GNU Make qui permettra de compiler la permiere partie :
+* Une fois à l'intérieur, éxecuter le logiciel GNU Make qui permettra de compiler la permiere partie (les arguments sont à definir dans le Makefile :
 
 ```
 make geffe
