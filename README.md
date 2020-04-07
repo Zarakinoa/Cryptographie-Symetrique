@@ -47,7 +47,7 @@ tar -cvf CryptographieSymetrique.tar CryptographieSymetrique/
 cd CryptographieSymetrique/
 ```
     
-* Une fois à l'intérieur, éxecuter le logiciel GNU Make qui permettra de compiler la permiere partie :
+* Une fois à l'intérieur, éxecuter le logiciel GNU Make qui permettra de compiler la permiere partie (les arguments se font dans le Makefile et dans le main) :
 
 ```
 make geffe
@@ -56,7 +56,10 @@ make geffe
 ```
 make feistel
 ```
-
+* le spectre est generé dans le fichier "spectre.txt" :
+```
+make spectre
+```
 
 
 ## Fabriqué avec
