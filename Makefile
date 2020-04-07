@@ -10,6 +10,7 @@ LDFLAGS = -lm
 
 GEFFE = bin/geffe
 FEISTEL = bin/feistel
+SPECTRE = bin/spectre
 SRC_PATH = src/
 OBJ_PATH = out/
 INC_PATH = lib/
@@ -30,6 +31,14 @@ geffe : compilgeffe
 
 feistel : compilfeistel
 	@./$(FEISTEL) $(FEISTEL_ARGS)
+
+## Spectre ....................................................................;
+
+spectre : compilspectre
+	@./$(SPECTRE) >> spectre.txt
+
+compilspectre :
+	@$(CC) src/spectre.c -o $(SPECTRE) $(LDFLAGS)
 
 ## Compilation Geffe ..........................................................:
 
