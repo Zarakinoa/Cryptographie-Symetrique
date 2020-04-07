@@ -25,7 +25,7 @@ En ce qui concerne l'exercice 2 :
 
 4. Soufiane et Salsabil se sont occupé de l'implémentation de l'attaque en langage C.
 
-5.6  Nous n'avons tous travailé dessus
+5.6  Nous avons tous travaillé dessus.
 
 En ce qui concerne la structure du projet qui n'est pas relatives au questions :
 
