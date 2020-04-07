@@ -66,6 +66,7 @@ clean :
 	$(info Suppression de $(GEFFE) et de $(OBJ))
 	@rm -f $(EXEC)
 	@rm -f $(OBJ)
+	@rm -f spectre.txt
 
 ## Debugger ...................................................................:
 
