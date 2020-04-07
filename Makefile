@@ -1,51 +1,65 @@
-## Variables ..........................................................................:
-CC= gcc
-CFLAGS= -Wall -g
+# Variables ...................................................................:
 
-## File directory .....................................................................:
-SRCDIR= src
-HEADDIR= include
-OBJDIR= object
-BINDIR= bin
+## Compilateur ................................................................:
 
-## Project structure ..................................................................:
-EXEC1= geffe
-EXEC2= feistel
-SRC1= $(wildcard $(SRCDIR)/Geffe/*.cpp)
-SRC2= $(wildcard $(SRCDIR)/Feistel/*.cpp)
-OBJ1= $(SRC:$(SRCDIR)/Geffe/*.cpp=$(OBJDIR)/*.o) 
-OBJ2= $(SRC:$(SRCDIR)/Feistel/*.cpp=$(OBJDIR)/*.o) 
+CC = gcc
+CFLAGS = -g3 -Wall
+LDFLAGS = -lm
 
-## Launching ..........................................................................:
-geffe: all
-	@$(BINDIR)/./$(EXEC1)
+## Structure du projet ........................................................:
 
-feistel: all
-	@$(BINDIR)/./$(EXEC2)
+GEFFE = bin/geffe
+FEISTEL = bin/feistel
+SRC_PATH = src/
+OBJ_PATH = out/
+INC_PATH = lib/
+REPORT_PATH = doc/
+SRC = $(shell find $(SRC_PATH)*.c)
+OBJ = $(SRC:$(SRC_PATH)%.c=$(OBJ_PATH)%.o)
 
-## Compilation ........................................................................:
-all: $(EXEC1) $(EXEC2)
+## Autres .....................................................................:
 
-$(EXEC1): $(OBJ1)
-	@$(CC) -g -o $(BINDIR)/$@ $^ 
+GEFFE_ARGS = 1 0 0 0 1 1 1 0 111100111100111010100101011111010110010011010011 16
 
-$(EXEC2): $(OBJ2)
-	@$(CC) -g -o $(BINDIR)/$@ $^
+FEISTEL_ARGS =
 
-$(OBJDIR)/Geffe/%.o: $(SRCDIR)/Geffe/%.cpp $(HEADDIR)/Geffe/%.h
-	@$(CC) -o $@ -c $< $(CFLAGS)
+## Lancement ..................................................................:
 
-$(OBJDIR)/Feistel/%.o: $(SRCDIR)/Feistel/%.cpp $(HEADDIR)/Feistel/%.h
-	@$(CC) -o $@ -c $< $(CFLAGS)
+geffe : compilgeffe
+	@./$(GEFFE) $(GEFFE_ARGS)
 
-## Object cleaning ....................................................................:
-clean:
-	@rm $(OBJDIR)/*.o
+feistel : compilfeistel
+	@./$(FEISTEL) $(FEISTEL_ARGS)
 
-## Executable cleaning ................................................................:
-Clean:clean
-	@rm $(BINDIR)/*
+## Compilation Geffe ..........................................................:
 
-## Archiving ..........................................................................:
-tar:
-	tar -zcvf ../CryptographieSymetrique.tar.gz *
+compilgeffe : $(GEFFE)
+
+$(GEFFE) : out/geffe.o
+	@$(CC) $^ -o $(GEFFE) $(LDFLAGS)
+
+out/geffe.o : src/geffe.c lib/geffe.h
+	@$(CC) -c $< -o $@ $(CFLAGS)
+
+## Compilation Feistel ........................................................:
+
+compilfeistel : $(FEISTEL)
+
+$(FEISTEL) : out/feistel.o
+	@$(CC) $^ -o $(FEISTEL) $(LDFLAGS)
+
+out/feistel.o : src/feistel.c lib/feistel.h
+	@$(CC) -c $< -o $@ $(CFLAGS)
+
+## Nettoyage ..................................................................:
+
+clean :
+	$(info Suppression de $(GEFFE) et de $(OBJ))
+	@rm -f $(EXEC)
+	@rm -f $(OBJ)
+
+## Debugger ...................................................................:
+
+gdb : compil
+	$(info Debbugage avec $@)
+	@gdb --args ./$(EXEC) $(ARGS)

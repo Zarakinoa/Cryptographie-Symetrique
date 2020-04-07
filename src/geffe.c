@@ -1,4 +1,4 @@
-#include <../include/Geffe.h>
+#include "../lib/geffe.h"
 
 
 //############################# Function #############################//
@@ -187,9 +187,9 @@ void correlation(float _correlation[],int _F[8])
     _correlation[1] = (cptX2 / 8.) * 100.; 
     _correlation[2] = (cptX3 / 8.) * 100.;   
 
-    printf("There is a 50 % correlation between x1 and F(x0x1x2)\n", _correlation[0]);
-    printf("There is a 50 % correlation between x1 and F(x0x1x2)\n", _correlation[1]);         
-    printf("There is a 50 % correlation between x1 and F(x0x1x2)\n", _correlation[2]);         
+    printf("There is a 50 %% correlation between x1 and F(x0x1x2) : %f\n", _correlation[0]);
+    printf("There is a 50 %% correlation between x1 and F(x0x1x2) : %f\n", _correlation[1]);         
+    printf("There is a 50 %% correlation between x1 and F(x0x1x2) : %f\n", _correlation[2]);         
          
             
 }
