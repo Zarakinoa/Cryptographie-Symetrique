@@ -187,11 +187,9 @@ void correlation(float _correlation[],int _F[8])
     _correlation[1] = (cptX2 / 8.) * 100.; 
     _correlation[2] = (cptX3 / 8.) * 100.;   
 
-    printf("There is a 50 %% correlation between x1 and F(x0x1x2) : %f\n", _correlation[0]);
-    printf("There is a 50 %% correlation between x1 and F(x0x1x2) : %f\n", _correlation[1]);         
-    printf("There is a 50 %% correlation between x1 and F(x0x1x2) : %f\n", _correlation[2]);         
-         
-            
+    printf("\n\nThere is a %f %% correlation between x0 and F(x0x1x2)\n", _correlation[0]);
+    printf("There is a %f %% correlation between x1 and F(x0x1x2)\n", _correlation[1]);         
+    printf("There is a %f %% correlation between x2 and F(x0x1x2)\n", _correlation[2]);                 
 }
 
 //Calcul la corrélation entre une sous-clé ki (parmis les 2^16 possibilités de sous-clés) avec la suite chiffrante
@@ -205,10 +203,7 @@ float isGoodKey(SUBKEY* _subkey, CIPHERSUITE* _suite)
         if(_subkey->value[_suite->size-i] == _suite->value[i]) egality += 1.0;
     }
 
-    printf("\n");
-
     res = (egality/(float)_suite->size) *100.;
-    printf("%f\n",res);
 
     return res;
 }
@@ -222,8 +217,6 @@ void brutForce(SUBKEY* _subkey, int* i)
     {
         _subkey->value[j] = nbr%2;
         nbr = nbr/2;
-
-        //printf("%d",_subkey->value[j]);
     }
 
     *i = *i +1;
@@ -261,11 +254,8 @@ SUBKEY findSubkey(float _correlation, CIPHERSUITE* _suite)
     while(isGoodKey(&subkey, _suite) != _correlation)
     {
         brutForce(&subkey, &i);
-        printf("\n");
 
         if(i == 65536) break;
-
-        printf("%d", i);
     }
 
     return subkey;
@@ -280,34 +270,32 @@ KEY attaque(float _correlation[3], CIPHERSUITE* _suite)
     key.subkey2 = findSubkey(_correlation[1], _suite);
     key.subkey3 = findSubkey(_correlation[2], _suite);
 
-
+    printf("\nSubkey1 found : = ");
 
     for(int i=0; i < _suite->size; i++)
     {
         printf("%d", key.subkey1.value[i]);
     }
 
-    printf("\n");
+    printf("\nSubkey2 found : = ");
 
-
-     for(int j=0; j < _suite->size; j++)
+    for(int j=0; j < _suite->size; j++)
     {
         printf("%d", key.subkey2.value[j]);
     }
 
-    printf("\n");
-
+    printf("\nSubkey3 found : = ");
 
      for(int k=0; k < _suite->size; k++)
     {
-        printf("%d", key.subkey1.value[k]);
+        printf("%d", key.subkey3.value[k]);
     }
 
     return key;
 }
 
 //Construit le génerateur et produit la suite chiffrante
-void Generateur(char* _filtrageArg[], char* _keyArg, int _n)
+void Generate(char* _filtrageArg[], char* _keyArg, int _n)
 {
     GEFFE geffe;
     CIPHERSUITE suite;
@@ -328,18 +316,14 @@ void Generateur(char* _filtrageArg[], char* _keyArg, int _n)
         offset(&geffe.lfsr3);
     }
 
-    printf("\n");
+    printf("\nCIPHERSUITE IS := ");
 
     for(int j = 0; j < _n; j++)
     {
         printf("%d",suite.value[j]);
     }
 
-    printf("\n");
-
     correlation(_correlation,geffe.F);
-
-    printf("\n");
 
     attaque(_correlation, &suite);
 
@@ -351,7 +335,7 @@ void Generateur(char* _filtrageArg[], char* _keyArg, int _n)
 
 int main(int argc, char** argv)
 {
-    Generateur(argv, argv[9], atoi(argv[10]));
+    Generate(argv, argv[9], atoi(argv[10]));
 
     return 0;
 }
