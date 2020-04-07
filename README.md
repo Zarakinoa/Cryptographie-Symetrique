@@ -1,10 +1,7 @@
 # Cryptographie symétrique
 
-[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
-
-Ce projet à été réalisé en C, il consiste dans un premier temp en l'implémentation d'un générateur de type Geffe pour le chiffrement à flot, afin de pouvoir simuler une attaque par corrélation.
-Dans un second temp, il consiste en l'implémentation d'un générateur de type Feistel, afin ...
-
+Ce projet à été réalisé en C, il consiste dans un premier temps en l'implémentation d'un générateur de type Geffe pour le chiffrement à flot, afin de pouvoir simuler une attaque par corrélation.
+Dans un second temps, il consiste en l'implémentation d'un chiffrement par bloc de type de Feistel, sur 1 tour puis sur 12 pour permettre de procéder à une attaque sur 1 tour afin de la généraliser sur les tours complets.
 
 ## Pour commencer
 
@@ -50,7 +47,7 @@ tar -cvf CryptographieSymetrique.tar CryptographieSymetrique/
 cd CryptographieSymetrique/
 ```
     
-* Une fois à l'intérieur, éxecuter le logiciel GNU Make qui permettra de compiler la permiere partie (les arguments sont à definir dans le Makefile) :
+* Une fois à l'intérieur, éxecuter le logiciel GNU Make qui permettra de compiler la permiere partie :
 
 ```
 make geffe
@@ -75,4 +72,3 @@ Voici la liste des personnes qui ont réalisés ce projet :
 * **Salsabil Dafrane** _alias_ [@Salsa](https://github.com/salsabildf)
 * **Théo Lefebvre** _alias_ [@Cobb](https://github.com/Zarakinoa)
 * **Soufiane Chikar** _alias_ [@Ysejal](https://github.com/Ysejal)
-
