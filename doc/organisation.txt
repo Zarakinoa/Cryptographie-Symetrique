@@ -13,21 +13,19 @@ pour toutes le fonctions de filtrages possibles.
 
 5.  Ayant pris l'implémentation de Théo pour le Générateur et le spectre de corrélation de Salsabil, nous avons travaillés à deux pour l'implémentation de l'attaque qui nous permet de récupérer toutes les sous-clés de départ.
 
-6. Soufiane
+6. C'est Théo qui à trouvé la fonction de filtrage la plus résistante pour cette attaque.
 
 En ce qui concerne l'exercice 2 :
 
 1. Chacun à fait à la main le calcul du chiffrement (x1L, x1R)  plusieurs fois dû à des résultats complétements différents.  J'usqu'à trouver le même couple. Un programme a été implémenter en C par Soufiane et par Salsabil pour trouver les résultats, il est utilisable à l'aide du Makefile.
 
-2. Salsabil et Soufiane.
+2. Le système d'équation à été résolu par Soufiane et implémenté par Salsabil.
 
-3. Salsabil.
+3. Pour généraliser notre cryptanalyse au chiffrement complet, nous avons tous participé à la résolution de celle-ci.
 
-4. Salsabil.
+4. Soufiane et Salsabil se sont occupé de l'implémentation de l'attaque en langage C.
 
-5.
-
-6.
+5.6  Nous n'avons tous travailé dessus
 
 En ce qui concerne la structure du projet qui n'est pas relatives au questions :
 
