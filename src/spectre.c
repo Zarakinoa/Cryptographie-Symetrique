@@ -60,14 +60,15 @@ int ** init_x0x1x2(){
 
 
 // Cette fonction permet de retourner la correlation entre x0 , x1, X2 et le bit de filtrage correspondant
-int * correlation( ){
+int ** correlation( ){
     // Déclaration de Tableau
-    int* tab_correlation = malloc(3 * sizeof (int*) );
+    int** tab_correlation = malloc(256 * sizeof (int*) );
+    for (int i=0; i<256; i++) tab_correlation[i] = malloc (3 * sizeof (int) );
     
     //On test si l'allocation a bien été effectué
     if(tab_correlation == NULL) { printf("Reservation mémoire impossible !\n"); exit(-1); }
     
-    //on récupère le tableau des combinaisons de x0x1x2 possibles
+         //on récupère le tableau des combinaisons de x0x1x2 possibles
           // Déclaration de Tableau
           int** tab_bits = malloc(8 * sizeof (int*) );
           for (int i=0; i<8; i++) tab_bits[i] = malloc (3 * sizeof (int) );
@@ -104,13 +105,14 @@ int * correlation( ){
             //valeur de x2
             if ( tab_bits[j][2] == tab_filtrage[i][j] ) {cmpt2++; }
             
+            tab_correlation[i][0] = ( (cmpt0*100) / (8*256) );
+            tab_correlation[i][1] = ( (cmpt1*100) / (8*256) );
+            tab_correlation[i][2] = ( (cmpt2*100) / (8*256) );
+            
         }
 
     }
-    
-    tab_correlation[0] = ( (cmpt0*100) / (8*256) );
-    tab_correlation[1] = ( (cmpt1*100) / (8*256) );
-    tab_correlation[2] = ( (cmpt2*100) / (8*256) );
+
     
     //on desaloue la mémoire pour les tab_bits
      for (int i=0; i<8; i++) free (tab_bits[i]);
@@ -143,7 +145,8 @@ void affichage(){
     if(F== NULL) { printf("Reservation mémoire impossible !\n"); exit(-1); }
     
     // Déclaration de Tableau à deux dimensions des correlations
-    int * tab = malloc(3 * sizeof (int) );
+    int** tab = malloc(256 * sizeof (int*) );
+    for (int i=0; i<256; i++) tab[i] = malloc (3 * sizeof (int) );
     // test si le tableau à bien été alloué
     if(tab == NULL) { printf("Reservation mémoire impossible !\n"); exit(-1); }
    
@@ -157,11 +160,13 @@ void affichage(){
     for (int j=0; j<256; j++){
 
             printf("\n\nF = (%d, %d, %d, %d, %d, %d, %d, %d )",F[j][0],F[j][1],F[j][2],F[j][3],F[j][4],F[j][5],F[j][6],F[j][7] );
-            for (int i=0; i<3; i++) printf("\nCx%d = %d \n",i, tab[i]);
+            for (int i=0; i<3; i++) printf("\nCx%d = %d \n",i, tab[j][i]);
         
     }
     // desaloue la mémoire du tableau
     free(tab);
+    free(F);
+    
     
 }
 
